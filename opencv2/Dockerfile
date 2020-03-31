@@ -5,18 +5,18 @@ MAINTAINER Inho Choi <hasbegun@gmail.com>
 WORKDIR /projects
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y \ 
-    build-essential cmake libgtk2.0-dev pkg-config \
+    build-essential cmake git sudo vim wget pkg-config \
     python-numpy python-dev libavcodec-dev libavformat-dev \
     libswscale-dev libjpeg-dev libpng-dev libtiff5-dev \
     libjasper-dev libopencv-dev checkinstall pkg-config \
     yasm libjpeg-dev libavcodec-dev \
     libavformat-dev libswscale-dev libdc1394-22-dev \
-    libxine2 libgstreamer0.10-dev  libv4l-dev \
+    libxine2 libgstreamer0.10-dev libv4l-dev \
     libgstreamer-plugins-base0.10-dev python-dev \
     python-numpy libtbb-dev libqt4-dev libgtk2.0-dev \
     libmp3lame-dev libopencore-amrnb-dev \
     libopencore-amrwb-dev libtheora-dev libvorbis-dev \
-    libxvidcore-dev x264 v4l-utils vim wget
+    libxvidcore-dev x264 v4l-utils 
 
 RUN wget https://github.com/opencv/opencv/archive/2.4.13.6.tar.gz -O opencv-2.4.13.6.tar.gz
 RUN tar zxvf opencv-2.4.13.6.tar.gz && \
@@ -46,9 +46,7 @@ RUN tar zxvf opencv-2.4.13.6.tar.gz && \
     make all -j$(nproc) && \ 
     make install
 
-# clean up
-RUN rm -rf /projects/opencv-2.4.13.6 opencv-2.4.13.6.tar.gz 
-
+# add user
 RUN useradd -m developer && \
     usermod -aG sudo developer && \
     echo '%sudo ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
@@ -56,15 +54,11 @@ RUN useradd -m developer && \
     mkdir /home/developer/projects && \
     chown -R --from=root developer:developer /home/developer
 
-# Use C.UTF-8 locale to avoid issues with ASCII encoding
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8
+# add basic files
+ADD gitconfig .gitconfig
+ADD commit_template.txt .commit_template.txt
 
-ENV HOME /home/developer
-ENV USER developer
-USER developer
-ENV PATH /home/developer/.local/bin:$PATH
-# Avoid first use of sudo warning. c.f. https://askubuntu.com/a/22614/781671
-RUN touch $HOME/.sudo_as_admin_successful
+# clean up
+RUN rm -rf /projects/opencv-2.4.13.6 opencv-2.4.13.6.tar.gz 
 
 CMD [ "/bin/bash" ]

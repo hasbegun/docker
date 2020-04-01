@@ -64,4 +64,16 @@ RUN	rm -rf /workspace/opencv-3.4.9 /workspace/opencv_contrib-3.4.9
 
 RUN pip3 install pika streamlink setproctitle
 
+# add user
+RUN useradd -m developer && \
+    usermod -aG sudo developer && \
+    echo '%sudo ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
+    cp /root/.bashrc /home/developer/ && \
+    mkdir /home/developer/projects && \
+    chown -R --from=root developer:developer /home/developer
+
+# add basic files
+ADD gitconfig .gitconfig
+ADD commit_template.txt .commit_template.txt
+
 CMD ["/bin/bash"]

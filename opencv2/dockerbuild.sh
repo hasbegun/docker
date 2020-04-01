@@ -1,1 +1,1 @@
-docker build -t u16-opencv2 .
+docker build -t u16-ocv2 .

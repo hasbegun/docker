@@ -1,0 +1,2 @@
+echo "Download opencv 3.4.9 and opencv contrib 3.4.9."
+wget https://github.com/opencv/opencv/archive/3.4.9.tar.gz -O opencv-3.4.9.tar.gz && wget https://github.com/opencv/opencv_contrib/archive/3.4.9.tar.gz -O contrib-3.4.9.tar.gz

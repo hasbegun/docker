@@ -24,14 +24,19 @@ RUN apt-get update --fix-missing && apt-get install tzdata -qy &&\
 
 WORKDIR /workspace
 # Build OpenCV 3.4.9
+# Either run this or copy
+# Copy from local res dir. If error, run get_ocv3.sh.
+ADD res/opencv-3.4.9.tar.gz .
+ADD res/contrib-3.4.9.tar.gz .
+# Download Opencv and Contrib.
+# RUN \
+# 	wget https://github.com/opencv/opencv/archive/3.4.9.tar.gz -O opencv-3.4.9.tar.gz && \
+# 	wget https://github.com/opencv/opencv_contrib/archive/3.4.9.tar.gz -O contrib-3.4.9.tar.gz && \
 RUN \
-	wget https://github.com/opencv/opencv/archive/3.4.9.tar.gz -O opencv.tar.gz && \
-	tar zxf opencv.tar.gz && rm -f opencv.tar.gz && \
-	wget https://github.com/opencv/opencv_contrib/archive/3.4.9.tar.gz -O contrib.tar.gz && \
-	tar zxf contrib.tar.gz && rm -f contrib.tar.gz && \
+	tar zxf opencv-3.4.9.tar.gz && rm -f opencv.tar.gz && \
+	tar zxf contrib.tar.gz && rm -f contrib-3.4.9.tar.gz && \
 	cd opencv-3.4.9 && mkdir build && cd build && \
 	cmake -D CMAKE_BUILD_TYPE=RELEASE \
-	-D CMAKE_INSTALL_PREFIX=/usr/local \
 	-D INSTALL_PYTHON_EXAMPLES=OFF \
 	-D OPENCV_EXTRA_MODULES_PATH=/workspace/opencv_contrib-3.4.9/modules \
 	-D BUILD_DOCS=OFF \

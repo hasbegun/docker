@@ -1,7 +1,5 @@
 FROM u18-ocv3:latest
 
-#thanks https://github.com/lzane/Ubuntu-OpenCV3-docker/blob/master/Dockerfile
-
 RUN echo 'deb http://security.ubuntu.com/ubuntu xenial-security main' >> /etc/apt/sources.list
 # RUN echo 'deb http://security.ubuntu.com/ubuntu bionic-security main' >> /etc/apt/sources.list
 RUN apt-get update --fix-missing && \

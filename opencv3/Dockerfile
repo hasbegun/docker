@@ -79,8 +79,4 @@ RUN useradd -m developer && \
     mkdir /home/developer/projects && \
     chown -R --from=root developer:developer /home/developer
 
-# add basic files
-ADD res/gitconfig /home/developer/.gitconfig
-ADD res/commit_template.txt /home/developer/.commit_template.txt
-
 CMD ["/bin/bash"]

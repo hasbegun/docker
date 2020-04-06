@@ -1,9 +1,5 @@
 FROM ubuntu:18.04
 
-#thanks https://github.com/lzane/Ubuntu-OpenCV3-docker/blob/master/Dockerfile
-
-# apt-get python and build essentials
-
 RUN echo 'deb http://security.ubuntu.com/ubuntu xenial-security main' >> /etc/apt/sources.list
 # RUN echo 'deb http://security.ubuntu.com/ubuntu bionic-security main' >> /etc/apt/sources.list
 RUN apt-get update --fix-missing && apt-get install tzdata -qy &&\

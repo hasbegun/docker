@@ -54,11 +54,7 @@ RUN useradd -m developer && \
     mkdir /home/developer/projects && \
     chown -R --from=root developer:developer /home/developer
 
-# add basic files
-ADD res/gitconfig /home/developer/.gitconfig
-ADD res/commit_template.txt /home/developer/.commit_template.txt
-
 # clean up
-RUN rm -rf /projects/opencv-2.4.13.6 opencv-2.4.13.6.tar.gz
+RUN rm -rf /projects/opencv-2.4.13.6 /projects/opencv-2.4.13.6.tar.gz
 
 CMD [ "/bin/bash" ]

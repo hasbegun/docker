@@ -4,7 +4,7 @@ MAINTAINER Inho Choi <hasbegun@gmail.com>
 
 WORKDIR /projects
 RUN apt update && \
-    DEBIAN_FRONTEND=noninteractive apt install -y \ 
+    DEBIAN_FRONTEND=noninteractive apt install -y \
     build-essential cmake git sudo vim wget pkg-config \
     python-numpy python-dev libavcodec-dev libavformat-dev \
     libswscale-dev libjpeg-dev libpng-dev libtiff5-dev \
@@ -16,7 +16,7 @@ RUN apt update && \
     python-numpy libtbb-dev libqt4-dev libgtk2.0-dev \
     libmp3lame-dev libopencore-amrnb-dev \
     libopencore-amrwb-dev libtheora-dev libvorbis-dev \
-    libxvidcore-dev x264 v4l-utils 
+    libxvidcore-dev x264 v4l-utils
 
 RUN wget https://github.com/opencv/opencv/archive/2.4.13.6.tar.gz -O opencv-2.4.13.6.tar.gz
 RUN tar zxvf opencv-2.4.13.6.tar.gz && \
@@ -43,7 +43,7 @@ RUN tar zxvf opencv-2.4.13.6.tar.gz && \
     -DWITH_IMAGEIO=ON \
     -DBUILD_SHARED_LIBS=OFF \
     -DWITH_GSTREAMER=ON .. && \
-    make all -j$(nproc) && \ 
+    make all -j$(nproc) && \
     make install
 
 # add user
@@ -55,10 +55,10 @@ RUN useradd -m developer && \
     chown -R --from=root developer:developer /home/developer
 
 # add basic files
-ADD gitconfig .gitconfig
-ADD commit_template.txt .commit_template.txt
+ADD res/gitconfig /home/developer/.gitconfig
+ADD res/commit_template.txt /home/developer/.commit_template.txt
 
 # clean up
-RUN rm -rf /projects/opencv-2.4.13.6 opencv-2.4.13.6.tar.gz 
+RUN rm -rf /projects/opencv-2.4.13.6 opencv-2.4.13.6.tar.gz
 
 CMD [ "/bin/bash" ]

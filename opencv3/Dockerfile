@@ -26,15 +26,17 @@ WORKDIR /workspace
 # Build OpenCV 3.4.9
 # Either run this or copy
 # Copy from local res dir. If error, run get_ocv3.sh.
-ADD res/opencv-3.4.9.tar.gz .
-ADD res/contrib-3.4.9.tar.gz .
+# ADD res/opencv-3.4.9.tar.gz .
+# ADD res/contrib-3.4.9.tar.gz .
+
 # Download Opencv and Contrib.
-# RUN \
-# 	wget https://github.com/opencv/opencv/archive/3.4.9.tar.gz -O opencv-3.4.9.tar.gz && \
-# 	wget https://github.com/opencv/opencv_contrib/archive/3.4.9.tar.gz -O contrib-3.4.9.tar.gz && \
 RUN \
-	tar zxf opencv-3.4.9.tar.gz && rm -f opencv.tar.gz && \
-	tar zxf contrib.tar.gz && rm -f contrib-3.4.9.tar.gz && \
+	wget https://github.com/opencv/opencv/archive/3.4.9.tar.gz -O opencv-3.4.9.tar.gz && \
+	wget https://github.com/opencv/opencv_contrib/archive/3.4.9.tar.gz -O contrib-3.4.9.tar.gz
+
+RUN \
+	tar zxf opencv-3.4.9.tar.gz && rm -f opencv-3.4.9.tar.gz && \
+	tar zxf contrib-3.4.9.tar.gz && rm -f contrib-3.4.9.tar.gz && \
 	cd opencv-3.4.9 && mkdir build && cd build && \
 	cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D INSTALL_PYTHON_EXAMPLES=OFF \
@@ -78,7 +80,7 @@ RUN useradd -m developer && \
     chown -R --from=root developer:developer /home/developer
 
 # add basic files
-ADD gitconfig .gitconfig
-ADD commit_template.txt .commit_template.txt
+ADD res/gitconfig /home/developer/.gitconfig
+ADD res/commit_template.txt /home/developer/.commit_template.txt
 
 CMD ["/bin/bash"]

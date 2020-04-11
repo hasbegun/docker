@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Ref: https://medium.com/@pigiuz/hw-accelerated-gui-apps-on-docker-7fd424fe813e
 # /-------\      /-----------\     /----\       /---------\      /--------\      /-------\
@@ -25,7 +25,7 @@ exec docker run \
     --name xeyes_run \
     --net=host \
     -e DISPLAY=$IP:0 \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v ${HOME}/.Xauthority:/home/user/.Xauthority \
     xeyes \
     "$@"

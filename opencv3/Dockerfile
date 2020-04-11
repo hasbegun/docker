@@ -11,7 +11,7 @@ RUN apt-get update --fix-missing && apt-get install tzdata -qy &&\
 	libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libgtk2.0-dev libatlas-base-dev \
 	libv4l-0 libavcodec-dev libavformat-dev libavutil-dev ffmpeg \
 	libswscale-dev libavresample-dev \
-    libgstreamer1.0-dev \
+    libgstreamer1.0-dev openssh-server \
     vdpau-va-driver libvdpau-va-gl1 vdpauinfo \
     gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad\
     libgstreamer-plugins-base1.0-dev libgstreamer-plugins-good1.0-dev libgstreamer-plugins-bad1.0-dev \

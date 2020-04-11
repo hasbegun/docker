@@ -1,11 +1,11 @@
 #/bin/bash
 
 # Ref: https://medium.com/@pigiuz/hw-accelerated-gui-apps-on-docker-7fd424fe813e
-# /-------\     /-----------\     /----\      /---------\      /--------\      /-------\
-# |GUI App|<--> |Grphics Lib|<--> |Xlib| <==> |X11 socat| <--> |X Server| <--> |Display|
-# \-------/     \-----------/     \----/      \---------/      \--------/      \-------/
+# /-------\      /-----------\     /----\       /---------\      /--------\      /-------\
+# |GUI App| <--> |Grphics Lib| <--> |Xlib| <==> |X11 socat| <--> |X Server| <--> |Display|
+# \-------/      \-----------/     \----/       \---------/      \--------/      \-------/
 
-# if runing host is linux
+# if the runing host is linux
 # >> xhost +local:root;
 # >> docker run -it \
 #    -e DISPLAY=unix$DISPLAY \

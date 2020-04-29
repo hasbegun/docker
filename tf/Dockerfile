@@ -1,17 +1,12 @@
-FROM ubuntu:18.04
+FROM tensorflow/tensorflow:2.0.1-py3-jupyter
 
 RUN apt update && apt install -y \
 	build-essential \
-	cmake git \
     python3-pip python3-dev \
-    sudo vim
+	cmake git \
+    sudo vim wget
 
-RUN pip3 install tensorflow keras jupyter
-
-# FROM tensorflow/tensorflow:2.0.1-py3-jupyter
-# RUN apt update && apt install -y \
-# 	build-essential \
-# 	cmake git
+RUN pip3 install keras
 
 RUN useradd -m developer && \
     usermod -aG sudo developer && \
@@ -33,4 +28,5 @@ RUN touch $HOME/.sudo_as_admin_successful
 WORKDIR /home/developer/projects
 
 # CMD ["/bin/bash"]
-CMD ["jupyter notebook"]
+# CMD ["jupyter notebook"]
+CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]

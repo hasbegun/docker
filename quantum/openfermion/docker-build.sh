@@ -1,1 +1,1 @@
-docker build -t openfermion .
+docker build -t qiskit .

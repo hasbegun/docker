@@ -22,6 +22,8 @@ RUN wget https://github.com/jarro2783/cxxopts/archive/v2.2.0.tar.gz -O cxxopts-2
 	mkdir build && cd build && \
 	cmake .. && make -j $(nproc) && make install
 
+RUN pip3 install pyyaml jinja2
+
 RUN rm -rf /workspace
 
 CMD ["/bin/bash"]
